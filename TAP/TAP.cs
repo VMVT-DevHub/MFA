@@ -17,19 +17,11 @@ var clscr = app.Configuration["ClientSecret"]??"";
 app.MapPost("/login", async (HttpContext ctx, LoginRequest cred) => {
 	try {
 
-		    using var conn = new LdapConnection(new LdapDirectoryIdentifier(addomain), new (cred.UserName, cred.UserPass), AuthType.Basic);
+		using var conn = new LdapConnection(new(addomain), new(cred.UserName, cred.UserPass), AuthType.Basic);
 
 		conn.SessionOptions.SecureSocketLayer = true;
 		conn.SessionOptions.ReferralChasing = ReferralChasingOptions.None;
 		
-		
-		// using var conn = new LdapConnection(new LdapDirectoryIdentifier(addomain)) { 
-		// 	AuthType = AuthType.Basic,
-		// 	Credential = new NetworkCredential(cred.UserName, cred.UserPass) 
-		// };
-		// conn.SessionOptions.ProtocolVersion=3;
-		// conn.Bind(); 
-
 		var req = new Graph.Request(tenant,clid,clscr);
 		var grp = new Graph.Requests.TemporaryAccessPass(req){ IsUsableOnce=true, LifetimeInMinutes=60 };
 		
