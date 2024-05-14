@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
-    <RootNamespace>MFA_TAP</RootNamespace>
+    <RootNamespace>TAP</RootNamespace>
     <UserSecretsId>9831fff4-d470-4991-84ab-0b48296f57bf</UserSecretsId>
   </PropertyGroup>
   
@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
     <PackageReference Include="System.DirectoryServices.Protocols" Version="8.0.0" />
   </ItemGroup>
 

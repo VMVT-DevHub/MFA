@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'TAP/**'
   #workflow_dispatch
 jobs:
   build:
@@ -16,13 +18,13 @@ jobs:
         with:
           dotnet-version: '8.0.x'
       - name: Build
-        run: dotnet publish -c Debug -r linux-x64 -p:PublishSingleFile=true --self-contained false
+        run: dotnet publish -c Debug -r linux-x64 TAP/TAP.csproj -p:PublishSingleFile=true --self-contained false
         
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
            name: test-build
-           path: ./MFA-TAP/bin/Debug/net8.0/linux-x64/publish/
+           path: ./TAP/bin/Debug/net8.0/linux-x64/publish/
       
   deploy:
     name: Deploy to test
