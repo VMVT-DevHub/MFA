@@ -7,7 +7,7 @@ builder.Configuration.AddUserSecrets<Program>(true);
 
 var app = builder.Build();
 
-var domainad = app.Configuration["ADDomain"]??"";
+var addomain = app.Configuration["ADDomain"]??"";
 var domain = app.Configuration["Domain"]??"";
 var tenant = app.Configuration["Tenant"]??"";
 var clid = app.Configuration["ClientId"]??"";
@@ -16,8 +16,20 @@ var clscr = app.Configuration["ClientSecret"]??"";
 
 app.MapPost("/login", async (HttpContext ctx, LoginRequest cred) => {
 	try {
-		using var conn = new LdapConnection(domainad) { Credential = new NetworkCredential(cred.UserName, cred.UserPass) };
-		conn.Bind(); 
+
+		    using var conn = new LdapConnection(addomain);
+
+		var networkCredential = new NetworkCredential(cred.UserName, cred.UserPass, addomain);
+		conn.SessionOptions.SecureSocketLayer = false;
+		conn.AuthType = AuthType.Negotiate;
+		conn.Bind(networkCredential);
+		
+		// using var conn = new LdapConnection(new LdapDirectoryIdentifier(addomain)) { 
+		// 	AuthType = AuthType.Basic,
+		// 	Credential = new NetworkCredential(cred.UserName, cred.UserPass) 
+		// };
+		// conn.SessionOptions.ProtocolVersion=3;
+		// conn.Bind(); 
 
 		var req = new Graph.Request(tenant,clid,clscr);
 		var grp = new Graph.Requests.TemporaryAccessPass(req){ IsUsableOnce=true, LifetimeInMinutes=60 };
