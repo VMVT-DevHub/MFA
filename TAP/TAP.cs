@@ -21,7 +21,7 @@ app.MapPost("/login", async (HttpContext ctx, LoginRequest cred) => {
 
 		var networkCredential = new NetworkCredential(cred.UserName, cred.UserPass, addomain);
 		conn.SessionOptions.SecureSocketLayer = false;
-		conn.AuthType = AuthType.Negotiate;
+		conn.AuthType = AuthType.Basic;
 		conn.Bind(networkCredential);
 		
 		// using var conn = new LdapConnection(new LdapDirectoryIdentifier(addomain)) { 
@@ -42,7 +42,7 @@ app.MapPost("/login", async (HttpContext ctx, LoginRequest cred) => {
 	}
 	catch (LdapException ex) {
 		var err= ex.ErrorCode==49?"Neteisingi prisijungimo duomenys": $"{ex.Message} ({ex.ErrorCode})";
-		
+
 		Console.WriteLine(ex.StackTrace);
 
 		ctx.Response.StatusCode = 401;
