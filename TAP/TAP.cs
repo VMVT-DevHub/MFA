@@ -1,42 +1,33 @@
 using System.DirectoryServices.Protocols;
-using System.Net;
+using TAP;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.Configuration.AddUserSecrets<Program>(true);
-
 var app = builder.Build();
 
-var addomain = app.Configuration["ADDomain"]??"";
-var domain = app.Configuration["Domain"]??"";
-var tenant = app.Configuration["Tenant"]??"";
-var clid = app.Configuration["ClientId"]??"";
-var clscr = app.Configuration["ClientSecret"]??"";
+var cfg = new AppConfig(app);
 
+//todo: Lock IP
 
 app.MapPost("/login", async (HttpContext ctx, LoginRequest cred) => {
 	try {
 
-		using var conn = new LdapConnection(new(addomain), new(cred.UserName, cred.UserPass), AuthType.Basic);
-
+		using var conn = new LdapConnection(new(cfg.ADDomain), new(cred.UserName, cred.UserPass), AuthType.Basic);
 		conn.SessionOptions.SecureSocketLayer = true;
 		conn.SessionOptions.ReferralChasing = ReferralChasingOptions.None;
 		
-		var req = new Graph.Request(tenant,clid,clscr);
-		var grp = new Graph.Requests.TemporaryAccessPass(req){ IsUsableOnce=true, LifetimeInMinutes=60 };
+		var req = new Graph.Request(cfg.Tenant,cfg.ClientId,cfg.ClientSecret);
+		var grp = new Graph.Requests.TemporaryAccessPass(req){ IsUsableOnce=cfg.PassOnetime, LifetimeInMinutes=cfg.PassLifetime };
 		
-		await ctx.Response.WriteAsJsonAsync(
-			await grp.Process($"{cred.UserName}@{domain}")
-		);
+		//todo: log
 
-		return;
+		await ctx.Response.WriteAsJsonAsync(await grp.Process($"{cred.UserName}@{cfg.Domain}"));
 	}
 	catch (LdapException ex) {
 		var err= ex.ErrorCode==49?"Neteisingi prisijungimo duomenys": $"{ex.Message} ({ex.ErrorCode})";
-
-		Console.WriteLine(ex.StackTrace);
-
 		ctx.Response.StatusCode = 401;
+		
+		//todo: log
 		await ctx.Response.WriteAsJsonAsync(new{ Error=new{Message=err}});
 	}
 });
@@ -47,9 +38,3 @@ app.UseStaticFiles();
 
 app.Run();
 
-
-
-public class LoginRequest {
-	public string? UserName { get; set;}
-	public string? UserPass { get; set;}
-}
