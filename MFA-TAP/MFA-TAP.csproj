@@ -8,9 +8,10 @@
     <RootNamespace>MFA_TAP</RootNamespace>
     <UserSecretsId>9831fff4-d470-4991-84ab-0b48296f57bf</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-  </ItemGroup>
+  
+	<ItemGroup>
+		<Content Update="appsettings.json" CopyToPublishDirectory="Never" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
