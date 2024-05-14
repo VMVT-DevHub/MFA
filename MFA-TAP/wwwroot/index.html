@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>MFA - Vienkartinis slaptažodis</title>
+	<link rel="stylesheet" href="style.css?v=0.1">
+	<script src="script.js?v=0.1"></script>
+</head>
+<body>
+	<div class="main">
+		<div class="box">
+			<div class="title"><span>MFA</span></div>
+			<div class="wrap">
+				<div id="form" class="visible">
+					<form>
+						<div class="info"><span>Prisijunkite su savo kompiuterio slaptažodžiu</span></div>
+						<div><input id="user" type="text" placeholder="Prisijungimo vardas"></div>
+						<div><input id="pass" type="password" placeholder="Slaptažodis" readonly autocomplete="off" aria-autocomplete="none"></div>
+						<div id="klaida"></div>
+						<div class="button"><button id="submit" type="submit">Prisijungti</button></div>
+					</form>
+				</div>
+				<div id="result">
+					<div class="info"><span>Vienkartinis prieigos kodas:</span></div>
+					<div class="code"><span id="code"></span></div>
+					<div id="reset" class="button"><button type="button" id="resetb">Gauti naują kodą</button></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<p>&copy; 2024 VMVT</p>
+	</footer>
+</body>
+</html>
