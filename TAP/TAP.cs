@@ -17,12 +17,11 @@ var clscr = app.Configuration["ClientSecret"]??"";
 app.MapPost("/login", async (HttpContext ctx, LoginRequest cred) => {
 	try {
 
-		    using var conn = new LdapConnection(addomain);
+		    using var conn = new LdapConnection(new LdapDirectoryIdentifier(addomain), new (cred.UserName, cred.UserPass), AuthType.Basic);
 
-		var networkCredential = new NetworkCredential(cred.UserName, cred.UserPass, addomain);
-		conn.SessionOptions.SecureSocketLayer = false;
-		conn.AuthType = AuthType.Basic;
-		conn.Bind(networkCredential);
+		conn.SessionOptions.SecureSocketLayer = true;
+		conn.SessionOptions.ReferralChasing = ReferralChasingOptions.None;
+		
 		
 		// using var conn = new LdapConnection(new LdapDirectoryIdentifier(addomain)) { 
 		// 	AuthType = AuthType.Basic,
