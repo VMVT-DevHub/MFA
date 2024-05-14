@@ -42,6 +42,9 @@ app.MapPost("/login", async (HttpContext ctx, LoginRequest cred) => {
 	}
 	catch (LdapException ex) {
 		var err= ex.ErrorCode==49?"Neteisingi prisijungimo duomenys": $"{ex.Message} ({ex.ErrorCode})";
+		
+		Console.WriteLine(ex.StackTrace);
+
 		ctx.Response.StatusCode = 401;
 		await ctx.Response.WriteAsJsonAsync(new{ Error=new{Message=err}});
 	}
