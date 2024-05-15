@@ -32,10 +32,10 @@ window.addEventListener("load",()=>{
 			fFail("Neteisingas slaptažodis");
 		} else {
 			postData("/login", { userName: user.value, userPass: ps }).then((data) => {
-				if(data.temporaryAccessPass){
+				if(data.accessPass){
 					var rst = document.getElementById("reset"); rst.className="button hidden";
 					document.getElementById("result").className="visible";
-					document.getElementById("code").textContent = data.temporaryAccessPass;
+					document.getElementById("code").textContent = data.accessPass;
 					document.getElementById("form").className="hidden";
 					setTimeout(() => {
 						rst.className="button visible";
@@ -43,9 +43,9 @@ window.addEventListener("load",()=>{
 					}, 5000);
 				} else {
 					
-					if(data.error.message.indexOf("does not allow")>0){
+					if(data.error.indexOf("does not allow")>0){
 						ermsg.textContent="Šis prisijungimo būdas jums neleistinas, naudokite MFA programėlę ar SMS.";
-					} else { fFail(data.error.message || "Nežinoma klaida"); }
+					} else { fFail(data.error || "Nežinoma klaida"); }
 				}
 			});
 		}
