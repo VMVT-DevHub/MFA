@@ -1,0 +1,51 @@
+name: UI Prod release
+on:
+  push:
+    branches:
+        - prod
+    paths:
+        - 'mfa-ui/**'
+  workflow_dispatch:
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mfa-ui
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build React app
+        run: yarn build
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: prod-files
+          path: mfa-uim/build
+          if-no-files-found: error
+
+  deploy:
+    name: Deploy to prod
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Finish Deployment
+        run: |
+          response=$(curl -s $API_URL)
+          echo "Response Web1: $response"
+        env:
+          API_URL: ${{ secrets.UI_TRIGGER_PROD }}
+
