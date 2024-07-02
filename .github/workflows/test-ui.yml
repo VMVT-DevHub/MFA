@@ -10,6 +10,9 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mfa-ui
 
     steps:
       - name: Checkout code
