@@ -55,7 +55,7 @@ public static class Log {
 	public static string LogPath { get; set; }
 	public static void Write(string user, string msg, HttpContext? ctx=null){
 		var now = DateTime.UtcNow;
-		File.AppendAllText(GetLogFile(), $"{now:dd HH:mm:ss} {(ctx is null?"0.0.0.0":ctx.GetIP())} {System.Net.WebUtility.UrlEncode(user)} {msg}{Environment.NewLine}");
+		File.AppendAllText(GetLogFile(), $"{now:dd HH:mm:ss} {(ctx is null?"0.0.0.0":ctx.GetIP())} {System.Net.WebUtility.UrlEncode(user)} \"{msg.Replace("\"","\"\"")}\"{Environment.NewLine}");
 	}
 
 	private static string? LogFile { get; set; }
