@@ -44,8 +44,12 @@ jobs:
     steps:
       - name: Finish Deployment
         run: |
-          response=$(curl -s $API_URL)
-          echo "Response Web1: $response"
+            response=$(curl -s $API_URL1)
+            echo "Response Web1: $response"
+            response=$(curl -s $API_URL2)
+            echo "Response Web2: $response"
         env:
-          API_URL: ${{ secrets.UI_TRIGGER_PROD }}
+            API_URL1: ${{ secrets.UI_TRIGGER_PROD1 }}
+            API_URL2: ${{ secrets.UI_TRIGGER_PROD2 }}
+
 
