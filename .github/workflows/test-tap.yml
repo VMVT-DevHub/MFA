@@ -1,4 +1,4 @@
-name: TAP Test release
+name: Test TAP release
 on:
   push:
     branches:

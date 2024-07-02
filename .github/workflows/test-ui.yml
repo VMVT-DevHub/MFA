@@ -1,4 +1,4 @@
-name: UI Test release
+name: Test UI release
 on:
   push:
     branches:

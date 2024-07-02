@@ -1,4 +1,4 @@
-name: UI Prod release
+name: Prod UI release
 on:
   push:
     branches:

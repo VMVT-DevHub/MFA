@@ -1,4 +1,4 @@
-name: TAP Prod release
+name: Prod TAP release
 on:
   push:
     branches:
