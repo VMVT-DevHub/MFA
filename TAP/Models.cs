@@ -89,6 +89,6 @@ public static class Log {
 	}
 
 	public static async Task GetLogs(HttpContext ctx, string log) => await PrintLog(ctx, Path.Combine(LogPath, log + ".log"));	
-	public static async Task GetLogList(HttpContext ctx) => await ctx.Response.WriteAsJsonAsync(Directory.GetFiles(LogPath, "*.log"));
+	public static async Task GetLogList(HttpContext ctx) => await ctx.Response.WriteAsJsonAsync(Directory.GetFiles(LogPath, "*.log").Select(Path.GetFileNameWithoutExtension));
 	public static async Task GetLogNow(HttpContext ctx) => await PrintLog(ctx, GetLogFile());
 }
