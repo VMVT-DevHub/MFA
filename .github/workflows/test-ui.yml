@@ -33,7 +33,8 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test-files
-          path: mfa-ui/build
+          path: mfa-uim/build
+          if-no-files-found: error
 
   deploy:
     name: Deploy to test
