@@ -15,7 +15,7 @@ var pth = Path.Combine(dir, "logs");
 if (!Directory.Exists(pth)) { Directory.CreateDirectory(pth); }
 
 
-app.MapPost("/login", async (HttpContext ctx, LoginRequest cred) => {
+app.MapPost("/tap/login", async (HttpContext ctx, LoginRequest cred) => {
 	if(cred.UserName?.Length>3 && cred.UserPass?.Length>3) {
 		try {
 
@@ -59,8 +59,10 @@ app.MapPost("/login", async (HttpContext ctx, LoginRequest cred) => {
 	}
 });
 
-app.MapGet("/logs/{log}",Log.GetLogs);
 
+app.MapGet("/tap/logs/list",Log.GetLogList);
+app.MapGet("/tap/logs/now",Log.GetLogNow);
+app.MapGet("/tap/logs/item/{log}",Log.GetLogs);
 
 app.UseDefaultFiles();
 app.UseStaticFiles();

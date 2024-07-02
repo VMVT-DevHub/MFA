@@ -83,24 +83,12 @@ public static class Log {
 		return ctx.Connection.RemoteIpAddress?.ToString() ?? "0.0.0.0";
 	}
 
-	public static async Task GetLogs(HttpContext ctx, string log){
-		if(log=="list"){
-			string[] files = Directory.GetFiles(LogPath, "*.log");
-			var i = 0;
-			ctx.Response.ContentType = "text/html";
-
-			await ctx.Response.WriteAsync($"<div>0: <a href=\"\\logs\\now\">Dabartinis</a><br> </div>");
-			foreach (string file in files) {
-				i++;
-				var fle = Path.GetFileNameWithoutExtension(file);
-				await ctx.Response.WriteAsync($"<div>{i}: <a href=\"\\logs\\{fle}\">{fle}</a></div>");
-			}
-		} else {
-			var fle = log=="now"? GetLogFile() : Path.Combine(LogPath, log + ".log");
-			if(File.Exists(Path.Combine(fle))){
-				await ctx.Response.SendFileAsync(fle);
-			}
-			else { ctx.Response.StatusCode = 404; }
-		}
+	private static async Task PrintLog(HttpContext ctx, string file){
+		if(File.Exists(file)) await ctx.Response.SendFileAsync(file);
+		else ctx.Response.StatusCode = 404; 
 	}
+
+	public static async Task GetLogs(HttpContext ctx, string log) => await PrintLog(ctx, Path.Combine(LogPath, log + ".log"));	
+	public static async Task GetLogList(HttpContext ctx) => await ctx.Response.WriteAsJsonAsync(Directory.GetFiles(LogPath, "*.log"));
+	public static async Task GetLogNow(HttpContext ctx) => await PrintLog(ctx, GetLogFile());
 }

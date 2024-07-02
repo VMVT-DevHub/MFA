@@ -31,7 +31,7 @@ window.addEventListener("load",()=>{
 		if(ps.length<8){
 			fFail("Neteisingas slaptažodis");
 		} else {
-			postData("/login", { userName: user.value, userPass: ps }).then((data) => {
+			postData("/tap/login", { userName: user.value, userPass: ps }).then((data) => {
 				if(data.accessPass){
 					var rst = document.getElementById("reset"); rst.className="button hidden";
 					document.getElementById("result").className="visible";
