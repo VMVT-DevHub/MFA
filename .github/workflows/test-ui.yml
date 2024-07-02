@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test-files
-          path: build
+          path: mfa-ui/build
 
   deploy:
     name: Deploy to test
