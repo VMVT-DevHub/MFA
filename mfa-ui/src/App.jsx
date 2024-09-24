@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div className="App">
-      <div>
+      <div className="App-header">
         <img src={logo} className="App-logo" alt="VMVT logo" />
         <h1 className="App-text">MFA vienkartinis slaptažodis</h1>
       </div>
@@ -43,7 +43,7 @@ function App() {
         )}
       </div>
 
-      <div>
+      <div className="App-footer">
         <p className="App-footer-text">&copy; {currentYear} VMVT</p>
       </div>
     </div>

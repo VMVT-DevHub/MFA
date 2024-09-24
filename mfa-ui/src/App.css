@@ -24,6 +24,19 @@
   margin-bottom: 0.625rem;
 }
 
+.App-header {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex-basis: 0;
+}
+
+.App-footer {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
 .App-footer-text {
   color: #52525b;
   font-family: "Poppins", sans-serif;
