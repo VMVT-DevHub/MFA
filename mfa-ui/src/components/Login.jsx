@@ -30,8 +30,8 @@ function Login({ onSubmit, isError }) {
         onFocus={(e) => e.target.removeAttribute("readonly")}
       />
       <input
-        className={styles["shared-input"]}
-        type="password"
+        className={styles["shared-input-psw"]}
+        type="text"
         placeholder="Slaptažodis"
         value={password}
         onChange={(e) => setPassword(e.target.value)}

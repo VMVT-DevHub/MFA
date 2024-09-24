@@ -1,10 +1,16 @@
+import { useState } from "react";
 import styles from "./Shared.module.css";
 
 function AccessPassDisplay({ accessPass }) {
+  const [isClicked, setIsClicked] = useState(false);
+  //const buttonStyle = { backgroundColor: isClicked ? "#476795" : "#2a4871" };
+
   const copyToClipboard = () => {
     navigator.clipboard.writeText(accessPass).catch((err) => {
       console.error("Error copying text to clipboard: ", err);
     });
+
+    setIsClicked((prev) => true);
   };
 
   return (
@@ -14,11 +20,11 @@ function AccessPassDisplay({ accessPass }) {
         <div className={styles["shared-code"]}>{accessPass}</div>
       </div>
       <button
-        className={styles["shared-btn"]}
+        className={styles[`${isClicked ? "shared-btn-clicked" : "shared-btn"}`]}
         type="button"
         onClick={copyToClipboard}
       >
-        Kopijuoti
+        {isClicked ? "Nukopijuota" : "Kopijuoti"}
       </button>
     </div>
   );

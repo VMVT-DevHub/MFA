@@ -16,10 +16,30 @@
   width: 100%;
 }
 
+.shared-btn:hover {
+  background-color: #6a87ae;
+}
+
+.shared-btn-clicked {
+  background-color: #6a87ae;
+  border-radius: 0.5rem;
+  color: white;
+  padding: 1rem;
+  cursor: pointer;
+  width: 100%;
+}
+
 .shared-input {
   border-radius: 0.5rem;
   border: 0.125rem solid #dcdcdc;
   padding: 1rem;
+}
+
+.shared-input-psw {
+  border-radius: 0.5rem;
+  border: 0.125rem solid #dcdcdc;
+  padding: 1rem;
+  -webkit-text-security: disc;
 }
 
 .shared-input:focus {
