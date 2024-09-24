@@ -7,12 +7,12 @@ function Login({ onSubmit, isError }) {
   const [password, setPassword] = useState("");
 
   return (
-    <div
+    <form
       className={styles["shared-container"]}
-      // onSubmit={async (e) => {
-      //   e.preventDefault();
-      //   await onSubmit(username, password);
-      // }}
+      onSubmit={async (e) => {
+        e.preventDefault();
+        await onSubmit(username, password);
+      }}
       autoComplete="off"
     >
       <p className={styles["shared-paragraph"]}>
@@ -61,7 +61,7 @@ function Login({ onSubmit, isError }) {
       >
         Prisijungti
       </button>
-    </div>
+    </form>
   );
 }
 
