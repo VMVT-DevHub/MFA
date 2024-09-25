@@ -46,6 +46,21 @@
   margin-top: 1.875rem;
 }
 
+.App-link {
+  margin-top: 1.875rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.App-link a {
+  color: #52525b;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  line-height: 1.375rem;
+  letter-spacing: 0.00625rem;
+}
+
 .App-container {
   width: 100%;
   max-width: 27.25rem;
