@@ -3,7 +3,6 @@ import styles from "./Shared.module.css";
 
 function AccessPassDisplay({ accessPass }) {
   const [isClicked, setIsClicked] = useState(false);
-  //const buttonStyle = { backgroundColor: isClicked ? "#476795" : "#2a4871" };
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(accessPass).catch((err) => {

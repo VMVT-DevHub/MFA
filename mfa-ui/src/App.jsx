@@ -13,6 +13,12 @@ function App() {
 
   const handleSubmit = async (username, password) => {
     setIsError(false);
+
+    if (password.length <= 4) {
+      setIsError(true);
+      return;
+    }
+
     const response = await fetch("/tap/login", {
       method: "POST",
       cache: "no-cache",
