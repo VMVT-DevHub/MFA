@@ -5,74 +5,85 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 20px;
-  background-color: #F8FAFC;
+  background-color: #f8fafc;
 }
 
 .App-text {
   color: #192f4e;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 600;
-  font-size: 52px;
-  line-height: 62px;
-  letter-spacing: -2px;
-  margin: 10px 0 20px;
+  font-size: 3.25rem;
+  line-height: 3.875rem;
+  letter-spacing: -0.125rem;
+  margin: 0.625rem 0 1.25rem;
 }
 
 .App-logo {
   pointer-events: none;
-  height: 73px;
-  margin-bottom: 10px; 
+  height: 4.5625rem;
+  margin-bottom: 0.625rem;
+}
+
+.App-header {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex-basis: 0;
+}
+
+.App-footer {
+  flex-grow: 1;
+  flex-basis: 0;
 }
 
 .App-footer-text {
-  color: #52525B;
-  font-family: 'Poppins', sans-serif;
+  color: #52525b;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 22px;
-  margin-top: 30px;
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+  margin-top: 1.875rem;
 }
 
 .App-container {
-  width: 436px;
+  width: 100%;
+  max-width: 27.25rem;
   height: auto;
-  border-radius: 20px;
-  padding: 32px;
-  gap: 10px;
+  border-radius: 1.25rem;
+  padding: 2rem;
+  gap: 0.625rem;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #ffffff;
-  box-shadow: 
-    0px 10px 15px rgba(0, 0, 0, 0.03),
-    0px 3px 11px rgba(0, 0, 0, 0.06);
+  box-shadow: 0px 0.625rem 0.9375rem rgba(0, 0, 0, 0.03),
+    0px 0.1875rem 0.6875rem rgba(0, 0, 0, 0.06);
 }
 
 @media (max-width: 600px) {
   .App-text {
-    font-size: 36px;
-    line-height: 44px;
+    font-size: 2.25rem;
+    line-height: 2.75rem;
   }
 
   .App-logo {
-    height: 50px;
+    height: 3.125rem;
   }
 
   .App-container {
     width: 90%;
-    padding: 20px;
-    box-shadow: none; 
+    padding: 1.25rem;
+    box-shadow: none;
   }
 
   .App-footer-text {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 }
 
-@media (min-width: 601px) {
+@media (min-width: 601px) and (max-width: 1200px) {
   .App-container {
-    width: 436px;
-    height: 229px;
+    width: 80%;
   }
 }
