@@ -50,6 +50,16 @@ function App() {
       </div>
 
       <div className="App-footer">
+        <div className="App-link">
+          <a href="https://mysignins.microsoft.com/security-info">
+            Konfigūruoti MFA
+          </a>
+
+          <a href="https://vmvtlt.sharepoint.com/SitePages/MFA--multi-factor-authentication.aspx">
+            Instrukcija
+          </a>
+        </div>
+
         <p className="App-footer-text">&copy; {currentYear} VMVT</p>
       </div>
     </div>
