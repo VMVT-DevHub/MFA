@@ -6,12 +6,21 @@ function Login({ onSubmit, isError }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [isDisabled, setIsDisabled] = useState(false)
+
   return (
     <form
       className={styles["shared-container"]}
       onSubmit={async (e) => {
         e.preventDefault();
-        await onSubmit(username, password);
+
+        let trimmedUsername = username;
+        if(username.includes("@vmvt.lt"))
+        {
+          trimmedUsername = username.split("@vmvt.lt")[0];
+        }
+
+        await onSubmit(trimmedUsername, password);
       }}
       autoComplete="off"
     >
@@ -54,9 +63,12 @@ function Login({ onSubmit, isError }) {
       )}
       <button
         className={styles["shared-btn"]}
+        disabled={isDisabled}
         onClick={async (e) => {
           e.preventDefault();
+          setIsDisabled(true);
           await onSubmit(username, password);
+          setIsDisabled(false);
         }}
       >
         Prisijungti
