@@ -77,6 +77,7 @@
   word-break: keep-all;
   overflow-wrap: normal;
   white-space: nowrap;
+  user-select:all;
 }
 
 .shared-error-container {
