@@ -33,11 +33,11 @@ app.MapPost("/tap/login", async (HttpContext ctx, LoginRequest cred) => {
 				while (searchResult.HasMore()) {
 					LdapEntry entry = searchResult.Next();
 					upn = entry.GetAttribute("userPrincipalName").StringValue;
-					var email = entry.GetAttribute("proxyAddresses").StringValueArray;
-					foreach(var i in email) {
-						var j = i.Split(':');
-						if (j[0] == "SMTP") upn = j[1];
-					}
+					//var email = entry.GetAttribute("proxyAddresses").StringValueArray;
+					//foreach(var i in email) {
+					//	var j = i.Split(':');
+					//	if (j[0] == "SMTP") upn = j[1];
+					//}
 				}
 			} catch (Exception) { }
 
