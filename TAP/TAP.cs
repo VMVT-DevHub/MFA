@@ -24,10 +24,28 @@ app.MapPost("/tap/login", async (HttpContext ctx, LoginRequest cred) => {
 			conn.Connect(cfg.ADHost, cfg.ADPort);
 			conn.Bind($"{cfg.ADDomain}\\{usr}", cred.UserPass);
 
+			string searchBase = "OU=Darbuotojai,DC=vmvt,DC=local"; // Replace with your domain
+			string searchFilter = "(sAMAccountName=" + usr + ")";
+			var searchResult = conn.Search(searchBase, LdapConnection.ScopeSub, searchFilter, ["cn", "proxyAddresses","userPrincipalName"], false);
+
+			var upn = $"{usr}@{cfg.Domain}";
+			try {
+				while (searchResult.HasMore()) {
+					LdapEntry entry = searchResult.Next();
+					upn = entry.GetAttribute("userPrincipalName").StringValue;
+					var email = entry.GetAttribute("proxyAddresses").StringValueArray;
+					foreach(var i in email) {
+						var j = i.Split(':');
+						if (j[0] == "SMTP") upn = j[1];
+					}
+				}
+			} catch (Exception) { }
+
+
 			var req = new Graph.Request(cfg.Tenant,cfg.ClientId,cfg.ClientSecret);
 			var grp = new Graph.Requests.TemporaryAccessPass(req){ IsUsableOnce=cfg.PassOnetime, LifetimeInMinutes=cfg.PassLifetime };
 			
-			var rsp = await grp.Process($"{usr}@{cfg.Domain}");
+			var rsp = await grp.Process(upn);
 			var ret = new LoginResponse();
 
 			if(rsp.Error is not null){
