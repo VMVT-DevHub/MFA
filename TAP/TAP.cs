@@ -13,6 +13,7 @@ var cfg = new AppConfig(app);
 var dir = Directory.GetCurrentDirectory();
 var pth = Path.Combine(dir, cfg.Logs);
 if (!Directory.Exists(pth)) { Directory.CreateDirectory(pth); }
+Log.LogPath = pth;
 
 
 app.MapPost("/tap/login", async (HttpContext ctx, LoginRequest cred) => {
