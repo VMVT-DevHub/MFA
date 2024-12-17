@@ -21,6 +21,7 @@ public class AppConfig {
 	public string Tenant { get; set; } = string.Empty;
 	public string ClientId { get; set; } = string.Empty;
 	public string ClientSecret { get; set; } = string.Empty;
+	public string Logs { get; set; } = "../taplogs";
 	public DateOnly SecretExpiration { get; set; }
 	public int PassLifetime { get; set; }
 	public bool PassOnetime { get; set; }
@@ -36,6 +37,7 @@ public class AppConfig {
 		ADDomain = GetString("ADDomain");
 		Domain = GetString("Domain");
 		Tenant = GetString("Tenant");
+		Logs = GetString("Logs");
 		ClientId = GetString("ClientId");
 		ClientSecret = GetString("ClientSecret");
 		PassLifetime = GetInt("PassLifetime", 60);

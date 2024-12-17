@@ -11,7 +11,7 @@ var cfg = new AppConfig(app);
 //todo: Lock IP
 
 var dir = Directory.GetCurrentDirectory();
-var pth = Path.Combine(dir, "logs");
+var pth = Path.Combine(dir, cfg.Logs);
 if (!Directory.Exists(pth)) { Directory.CreateDirectory(pth); }
 
 
