@@ -83,8 +83,8 @@ app.MapGet("/tap/logs/list",Log.GetLogList);
 app.MapGet("/tap/logs/now",Log.GetLogNow);
 app.MapGet("/tap/logs/item/{log}",Log.GetLogs);
 
-app.UseDefaultFiles();
-app.UseStaticFiles();
+//app.UseDefaultFiles();
+//app.UseStaticFiles();
 
 
 Log.Write("SYSTEM","Started");

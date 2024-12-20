@@ -50,10 +50,7 @@ public class AppConfig {
 }
 
 public static class Log {
-	static Log() {
-		LogPath = Path.Combine(Directory.GetCurrentDirectory(), "logs");
-		if (!Directory.Exists(LogPath)) { Directory.CreateDirectory(LogPath); }
-	}
+	static Log() { LogPath = Path.Combine(Directory.GetCurrentDirectory(), "logs"); }
 	public static string LogPath { get; set; }
 	public static void Write(string user, string msg, HttpContext? ctx=null){
 		var now = DateTime.UtcNow;
